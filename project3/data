@@ -1,0 +1,7 @@
+PROGRAM
+   A : INTEGER;
+BEGIN
+   IF A < 50 THEN
+      A := 99;
+   END IF;
+END PROGRAM; **

@@ -1,7 +1,7 @@
 /*
  * Peter Nguyen
  * CSCI 371 - Project 3
- * Due:Dec. 4, 2017
+ * Due: Dec. 4, 2017
  * Lexer for a Mini-Language
  */
 

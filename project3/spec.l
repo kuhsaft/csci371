@@ -10,11 +10,9 @@
 #include <stdlib.h>
 %}
 
-digit         [0-9]
-letter        [a-zA-Z]
-
 %%
 
+ /* Reserved words */
 "PROGRAM" { return 501; }
 "BEGIN"   { return 502; }
 "END"     { return 503; }
@@ -26,11 +24,16 @@ letter        [a-zA-Z]
 "REAL"    { return 509; }
 "FOR"     { return 510; }
 
-{letter}({letter}|{digit}|_|%|&)* { return 100; }
+ /* Variables */
+[[:alpha:]][[:alnum:]_%&]* { return 100; }
 
-{digit}+           |
-{digit}+\.{digit}+ { return 200; }
+ /* Integers and floats */
+[[:digit:]]+   |
+\.[[:digit:]]+ |
+[[:digit:]]+\. |
+[[:digit:]]+\.[[:digit:]]+ { return 200; }
 
+ /* Math and relational operators */
 "+"  { return 301; }
 "-"  { return 302; }
 "<"  { return 303; }
@@ -42,6 +45,7 @@ letter        [a-zA-Z]
 "&&" { return 309; }
 "||" { return 310; }
 
+ /* Miscellaneous characters */
 ";"  { return 401; }
 ","  { return 402; }
 ":=" { return 403; }
@@ -49,9 +53,10 @@ letter        [a-zA-Z]
 "?"  { return 405; }
 "^"  { return 406; }
 
+ /* Whitespace */
+[[:space:]]+ ;
 
-[ \n\t\r]+ ;
-
+ /* Unknown */
 . { return 600; }
 
 %%
